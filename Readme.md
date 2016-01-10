@@ -1,1 +1,1 @@
-# A Hunt App
+# The Backend for a Hunt App
