@@ -11,18 +11,44 @@ handlers:
 - url: /.*
   script: public/index.php
 
+
 env_variables:
   APP_ENV: production
   APP_DEBUG: false
-  APP_KEY: SomeRandomStringHere!!!
-  APP_LOCALE: en
-  APP_FALLBACK_LOCALE: en
-  DB_CONNECTION: mysql
-  DB_HOST: localhost
-  DB_PORT: 3306
-  DB_DATABASE0: homestead
-  DB_USERNAME: homestead
-  DB_PASSWORD: secret
+  APP_KEY: ESWO3KXStkCGroe58EGLs0Nc4O5MUEUV
+
+  DB_HOST: 104.196.111.84
+  DB_DATABASE: homestead
+  DB_USERNAME: root
+  DB_PASSWORD: P4rambula
+
   CACHE_DRIVER: file
   SESSION_DRIVER: file
   QUEUE_DRIVER: sync
+
+  REDIS_HOST: 127.0.0.1
+  REDIS_PASSWORD: none
+  REDIS_PORT: 6379
+
+  MAIL_DRIVER: smtp
+  MAIL_HOST: 127.0.0.1
+  MAIL_PORT: 2525
+  MAIL_USERNAME: none
+  MAIL_PASSWORD: none
+  MAIL_ENCRYPTION: none
+
+# env_variables:
+#   APP_ENV: development
+#   APP_DEBUG: false
+#   APP_KEY: SomeRandomStringHere!!!
+#   APP_LOCALE: en
+#   APP_FALLBACK_LOCALE: en
+#   DB_CONNECTION: mysql
+#   DB_HOST: localhost
+#   DB_PORT: 3306
+#   DB_DATABASE: homestead
+#   DB_USERNAME: homestead
+#   DB_PASSWORD: secret
+#   CACHE_DRIVER: file
+#   SESSION_DRIVER: file
+#   QUEUE_DRIVER: sync
