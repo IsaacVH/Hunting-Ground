@@ -1,0 +1,17 @@
+{
+  "name": "Hunting-Ground",
+  "description": "Review app for the Hunting Ground production environment.",
+  "scripts": {
+    "postdeploy": "composer install"
+  },
+  "env": {
+    "APP_ENV": "dev",
+    "APP_DEBUG": "true"
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
