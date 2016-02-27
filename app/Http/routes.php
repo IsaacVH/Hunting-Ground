@@ -33,6 +33,23 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
-	Route::get('/user/profile', 'User\UserController@showProfile');
-});
 
+	Route::group(['prefix' => 'api'], function () {
+
+		Route::group(['prefix' => 'hunts'], function () {
+			Route::delete('/{hunt}', 'Api\HuntApiController@delete');
+			Route::get('/{hunt}', 'Api\HuntApiController@get');
+			Route::get('/', 'Api\HuntApiController@gets');
+			Route::put('/{hunt}', 'Api\HuntApiController@update');
+			Route::post('/', 'Api\HuntApiController@create');
+		});
+	});
+
+	Route::group(['prefix' => 'user'], function () {
+		Route::get('/user/profile', 'User\UserController@showProfile');
+	});
+
+	Route::group(['prefix' => 'hunts'], function () {
+		Route::get('/create', 'Hunt\HuntController@showCreate');
+	});
+});

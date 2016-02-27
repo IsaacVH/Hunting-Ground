@@ -1,5 +1,37 @@
 <?php
 
+function GetDBUrl($dbConnString) {
+    $dbArray = explode('://', $dbConnString, 2);
+    $dbInfo['username'] = '';
+    $dbInfo['password'] = '';
+    $dbInfo['database'] = '';
+    $dbInfo['host'] = '';
+
+    if (count($dbArray) > 1) {
+        $dbString = $dbArray[1];
+        $dbArray = explode(':', $dbString, 2);
+        $dbInfo['username'] = $dbArray[0];
+
+        if (count($dbArray) > 1) {
+            $dbString = $dbArray[1];
+            $dbArray = explode('@', $dbString, 2);
+            $dbInfo['password'] = $dbArray[0];
+
+            if (count($dbArray) > 1) {
+                $dbString = $dbArray[1];
+                $dbArray = explode('/', $dbString, 2);
+                $dbInfo['host'] = $dbArray[0];
+
+                $dbInfo['database'] = $dbArray[1];
+            }
+        }
+    }
+
+    return $dbInfo;
+}
+
+$dbInfo = GetDBUrl(getenv('DB_CONNECTION_STRING'));
+
 return [
 
     /*
@@ -26,7 +58,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,9 +87,9 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'forge'),
-            'username'  => env('DB_USERNAME', 'forge'),
-            'password'  => env('DB_PASSWORD', ''),
+            'database'  => env('DB_DATABASE', 'homestead'),
+            'username'  => env('DB_USERNAME', 'homestead'),
+            'password'  => env('DB_PASSWORD', 'homestead'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
@@ -66,10 +98,10 @@ return [
 
         'pgsql' => [
             'driver'   => 'pgsql',
-            'host'     => env('DB_HOST', 'localhost'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host'     => env('DB_HOST', $dbInfo['host']),
+            'database' => env('DB_DATABASE', $dbInfo['database']),
+            'username' => env('DB_USERNAME', $dbInfo['username']),
+            'password' => env('DB_PASSWORD', $dbInfo['password']),
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
